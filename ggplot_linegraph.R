@@ -2,6 +2,10 @@
 
 library(ggplot2)
 
+# Load funciton for multiple plots in one image. File needs to be in the same 
+# Directory, or need to add path to the file.
+source("multiplot.R")  
+
 ggplot() + 
   theme_bw() + 
   geom_line(data= , aes(x= , y= ), colour="blue", size = 2) +  # line
