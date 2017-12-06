@@ -13,5 +13,7 @@ ggplot() +
   theme(axis.text.y = element_text(size = 12),  # axis text size
         axis.text.x = element_text(size = 12)) + 
   theme(axis.line = element_line(color="black", size = 1)) +  # line at the axes
+  scale_y_continuous(limits = c( , )) +  # y-axis scale
+  scale_x_continuous(limits = c( , )) +  # x-axis scale
   xlab(" ") + ylab(" ") +  # axis labels
   theme(text = element_text(colour = 'black', size = 14, face = 'bold'))  # label text
