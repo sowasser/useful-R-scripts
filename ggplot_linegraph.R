@@ -1,4 +1,4 @@
-# General line plot in ggplot, white background, black axes, no gridlines
+# General line plot in ggplot, white/transparent background, black axes, no gridlines
 
 library(ggplot2)
 
@@ -6,7 +6,7 @@ library(ggplot2)
 # Directory, or need to add path to the file.
 source("multiplot.R")  
 
-ggplot() + 
+plot <- ggplot() + 
   theme_classic() + 
   geom_line(data= , aes(x= , y= ), colour="blue", size = 2) +  # line
   geom_point(data= , aes(x= , y= ), colour="black", size = 3) +  # points on the line
@@ -16,4 +16,18 @@ ggplot() +
   scale_y_continuous(limits = c( , )) +  # y-axis scale
   scale_x_continuous(limits = c( , )) +  # x-axis scale
   xlab(" ") + ylab(" ") +  # axis labels
-  theme(text = element_text(colour = 'black', size = 14, face = 'bold'))  # label text
+  theme(text = element_text(colour = 'black', size = 14, face = 'bold')) +  # label text
+  # If you want a transparent background
+  theme(
+    panel.background = element_rect(fill = "transparent"),
+    plot.background = element_rect(fill = "transparent")
+  )
+
+
+# High resolution photo export w/ transparent background
+png("path/filename.png", width = , height = , units = , bg = 'transparent', res = 300)
+# Call multiplot function. Fills in plots column-wise:
+# Plot 1  Plot3
+# Plot 2  Plot4
+multiplot(plot, cols=1)
+dev.off()
