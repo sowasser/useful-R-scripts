@@ -1,6 +1,6 @@
 # General script for running an ANOVA. Includes a simple bloxplot in ggplot.
 
-df <- read.csv("naoise2.csv")
+df <- read.csv("____.csv")
 
 library(ggplot2)
 
