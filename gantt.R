@@ -6,18 +6,14 @@ library(lubridate)
 library(scales)
 
 
-# path <- "~/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Local/Progress Reports/GRC"  # on laptop
-setwd("______")  # on desktop
-
-# Create dataframe of all tasks. Can have as many as desired in as many projects as desired.
 tasks <- tribble(
   ~Start,       ~End,         ~Project,          ~Task,
-  "2019-06-10", "2019-08-01", "Topic 1", "Task 1",
-  "2019-06-13", "2019-07-04", "Topic 2", "Task 2",
-  "2019-08-01", "2019-08-31", "Topic 3", "Task 3",
+  "2020-05-01", "2020-06-01", "Topic 1", "Description 1",
+  "2020-06-01", "2020-07-01", "Topic 2", "Description 2",
+  "2020-07-01", "2020-08-01", "Topic 3", "Description 3",
 )
 
-# Convert data to long for ggplot
+# Convert data too long for ggplot
 tasks.long <- tasks %>%
   mutate(Start = ymd(Start),
          End = ymd(End)) %>%
@@ -29,7 +25,8 @@ tasks.long <- tasks %>%
 theme_gantt <- function(base_size=11) {
   ret <- theme_bw()
   theme(panel.background = element_rect(fill="#ffffff", colour=NA),
-        axis.title.x=element_text(vjust=-0.2), axis.title.y=element_text(vjust=1.5),
+        axis.title.x=element_text(vjust=-0.2), 
+        axis.title.y=element_text(vjust=1.5),
         title=element_text(vjust=1.2),
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         axis.line=element_blank(),
@@ -49,10 +46,12 @@ timeline <- ggplot(tasks.long, aes(x=Task, y=task.date, colour=Project)) +
   geom_line(size=6) + 
   guides(colour=guide_legend(title=NULL)) +
   labs(x=NULL, y=NULL) + coord_flip() +
-  scale_y_date(date_breaks="2 months", labels=date_format("%b ‘%y")) +
-  theme_gantt() + theme(axis.text.x=element_text(angle=45, hjust=1))
+  scale_y_date(date_breaks="1 month", labels=date_format("%b ‘%y")) +  # Change how the dates on x-axis display
+  theme_gantt() + theme(axis.text.x=element_text(angle=45, hjust=1)) + 
+  scale_color_viridis_d()  # change colors to colorblind-friendly
 timeline
 
-# Change units here to make sure it works with the dimensions of the chart
-ggsave(timeline, filename = "gantt.png", width = 250, height = 120, units = "mm", 
+# TODO: Change units to make plot display well.
+ggsave(timeline, filename = "filename.png", 
+       width = 250, height = 120, units = "mm", 
        dpi = 300, bg = "transparent")
