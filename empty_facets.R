@@ -12,6 +12,7 @@ colnames(all) <- c("boxes", "x", "y")
 
 # Create faceted ggplot with no axis marks or text
 empty <- ggplot(all, aes(x = x, y = y)) +
+  theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         axis.title.x = element_blank(), axis.title.y = element_blank(),
         axis.text.x = element_blank(), axis.text.y = element_blank(),
@@ -22,4 +23,4 @@ empty <- ggplot(all, aes(x = x, y = y)) +
 
 # Save empty plot to desktop
 ggsave(filename="~/Desktop/empty.pdf", plot=empty,
-       width=250, height=100, units="mm", dpi=300)
+       width=190, height=80, units="mm", dpi=300)
